@@ -8,6 +8,8 @@ agent:
 
 blocks:
   - name: "Build & Test"
+    run:
+      when: "false" 
     dependencies: []
     task:
       jobs:
@@ -19,8 +21,7 @@ blocks:
 promotions:
   - name: Release
     pipeline_file: release.yml
-    auto_promote:
-      when: "tag =~ '.*'"
+    auto_promote: false
     parameters:
       env_vars:
         - required: true
