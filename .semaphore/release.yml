@@ -12,10 +12,10 @@ global_job_config:
       value: "1"
 
     - name: DEMO_IMAGE_REPO
-      value: "${DEMO_IMAGE_REPO:-ghcr.io/felixgateru/hello-go-demo}"
+      value: "ghcr.io/felixgateru/hello-go-demo"
 
     - name: STANDARD_IMAGE_REPO
-      value: "${STANDARD_IMAGE_REPO:-ghcr.io/felixgateru/hello-go}"
+      value: "ghcr.io/felixgateru/hello-go"
 
   secrets:
     - name: ghcr-push-token
