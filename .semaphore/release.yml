@@ -21,9 +21,11 @@ global_job_config:
       - |
         if [ -z "$REL_VERSION" ]; then
           REL_VERSION="daily-$(date +%Y%m%d)-$(git rev-parse --short HEAD)"
+          echo "Using generated REL_VERSION=$REL_VERSION (no checkout needed)"
+        else
+          echo "Using provided REL_VERSION=$REL_VERSION"
+          git checkout "$REL_VERSION"
         fi
-        echo "Using REL_VERSION=$REL_VERSION"
-      - git checkout $REL_VERSION
       - |
         cat <<EOF > release-metadata.json
         {
