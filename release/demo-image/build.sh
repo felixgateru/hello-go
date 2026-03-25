@@ -26,5 +26,5 @@ docker buildx build \
   --provenance=false \
   --push \
   -t "${IMAGE_REPO}:${VERSION}-${ARCH}" \
-  -f release/hello-go-demo-image/Dockerfile \
+  -f Dockerfile \
   .
