@@ -17,7 +17,7 @@ func randomHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	num := rand.IntN(10) + 1
+	num := rand.IntN(100) + 1
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(Response{Number: num})
