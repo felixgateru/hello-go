@@ -16,6 +16,12 @@ global_job_config:
 
   prologue:
     commands:
+      - |
+        if [ -z "$REL_VERSION" ]; then
+          REL_VERSION="daily-$(date +%Y%m%d)-$(git rev-parse --short HEAD)"
+        fi
+        echo "Using REL_VERSION=$REL_VERSION"
+
       - git clone https://github.com/felixgateru/hello-go.git
       - cd hello-go
       - git checkout $REL_VERSION
@@ -28,11 +34,6 @@ global_job_config:
           "workflow_id": "$SEMAPHORE_WORKFLOW_ID"
         }
         EOF
-      - |
-        if [ -z "$REL_VERSION" ]; then
-          REL_VERSION="daily-$(date +%Y%m%d)-$(git rev-parse --short HEAD)"
-        fi
-        echo "Using REL_VERSION=$REL_VERSION"
 
       - echo "$GHCR_PUSH_TOKEN" | docker login ghcr.io -u felixgateru --password-stdin
       - echo "$GHCR_PUSH_TOKEN" | helm registry login ghcr.io -u felixgateru --password-stdin

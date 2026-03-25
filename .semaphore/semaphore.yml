@@ -19,10 +19,13 @@ blocks:
 promotions:
   - name: Release
     pipeline_file: release.yml
+    auto_promote:
+      when: "tag =~ '.*'"
     parameters:
       env_vars:
         - required: true
           name: REL_VERSION
+          default_value: ${SEMAPHORE_GIT_TAG_NAME}
           description: "Release version / Git tag to build (e.g. v1.0.0)"
 
         - required: false

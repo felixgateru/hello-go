@@ -15,8 +15,8 @@ fi
 
 VERSION="$1"
 ARCH="$2"
-.
-IMAGE_REPO="${DEMO_IMAGE_REPO:-ghcr.io/hello-gohq/hello-go-demo}"
+
+IMAGE_REPO="${DEMO_IMAGE_REPO:-ghcr.io/felixgateru/hello-go-demo}"
 
 echo "Building hello-go demo image (${IMAGE_REPO})"
 

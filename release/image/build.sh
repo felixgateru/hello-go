@@ -16,7 +16,7 @@ fi
 VERSION="$1"
 ARCH="$2"
 
-IMAGE_REPO="${STANDARD_IMAGE_REPO:-ghcr.io/hello-gohq/hello-go}"
+IMAGE_REPO="${STANDARD_IMAGE_REPO:-ghcr.io/felixgateru/hello-go}"
 
 echo "Building hello-go image (${IMAGE_REPO})"
 
