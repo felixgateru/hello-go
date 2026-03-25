@@ -10,6 +10,12 @@ fi
 
 VERSION="$1"
 
+# Convert daily versions to semver-compatible prerelease format
+# daily-20260325-abc123 -> 0.0.0-daily.20260325.abc123
+if [[ "$VERSION" =~ ^daily- ]]; then
+  VERSION="0.0.0-${VERSION//-/.}"
+fi
+
 echo "Building and pushing hello-go Helm chart (version: ${VERSION})"
 
 # Package the Helm chart
