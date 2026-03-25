@@ -4,12 +4,12 @@ set -euo pipefail
 IFS=$'\n\t'
 
 if [ "${1-}" = "" ]; then
-  echo "Usage: release/hello-go-demo-image/build.sh <version> <arch>"
+  echo "Usage: release/demo-image/build.sh <version> <arch>"
   exit 1
 fi
 
 if [ "${2-}" = "" ]; then
-  echo "Usage: release/hello-go-demo-image/build.sh <version> <arch>"
+  echo "Usage: release/demo-image/build.sh <version> <arch>"
   exit 1
 fi
 
