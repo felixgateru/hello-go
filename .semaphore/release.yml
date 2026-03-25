@@ -117,4 +117,4 @@ blocks:
       jobs:
         - name: "Hello-go Helm Chart"
           commands:
-            - bash release/helm-chart/build.sh $REL_VERSION
+            - bash release/helm/build.sh $REL_VERSION
