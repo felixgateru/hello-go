@@ -1,16 +1,6 @@
 version: v1.0
 name: "Hello-go Release Pipeline"
 
-parameters:
-  - name: REL_VERSION
-    required: true
-
-  - name: DEMO_IMAGE_REPO
-    default_value: ghcr.io/felixgateru/hello-go-demo
-
-  - name: STANDARD_IMAGE_REPO
-    default_value: ghcr.io/felixgateru/hello-go
-
 agent:
   machine:
     type: f1-standard-2
