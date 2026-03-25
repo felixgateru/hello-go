@@ -4,27 +4,18 @@ set -euo pipefail
 IFS=$'\n\t'
 
 if [ "${1-}" = "" ]; then
-  echo "Usage: release/helm-chart/build.sh <version>"
-  exit 1
-fi
-
-if [ "${2-}" = "" ]; then
-  echo "Usage: release/helm-chart/build.sh <version> <arch>"
+  echo "Usage: release/helm/build.sh <version>"
   exit 1
 fi
 
 VERSION="$1"
-ARCH="$2"
 
-IMAGE_REPO="${STANDARD_IMAGE_REPO:-ghcr.io/felixgateru/hello-go}"
+echo "Building and pushing hello-go Helm chart (version: ${VERSION})"
 
-echo "Building hello-go image (${IMAGE_REPO})"
+# Package the Helm chart
+helm package ./helm/hello-go --version "${VERSION}" --app-version "${VERSION}"
 
-docker buildx build \
-  --platform "linux/${ARCH}" \
-  --progress=plain \
-  --provenance=false \
-  --push \
-  -t "${IMAGE_REPO}:${VERSION}-${ARCH}" \
-  -f Dockerfile \
-  .
+# Push to GHCR
+helm push "hello-go-${VERSION}.tgz" oci://ghcr.io/felixgateru/charts
+
+echo "Helm chart hello-go:${VERSION} pushed successfully"
