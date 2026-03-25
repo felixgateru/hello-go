@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: { { include "hello-go.fullname" . } }
+  labels: { { - include "hello-go.labels" . | nindent 4 } }
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels: { { - include "hello-go.selectorLabels" . | nindent 6 } }
+  template:
+    metadata:
+      labels: { { - include "hello-go.selectorLabels" . | nindent 8 } }
+    spec:
+      containers:
+        - name: { { .Chart.Name } }
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: { { .Values.image.pullPolicy } }
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources: { { - toYaml .Values.resources | nindent 10 } }
