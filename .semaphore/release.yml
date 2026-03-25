@@ -16,14 +16,13 @@ global_job_config:
 
   prologue:
     commands:
+      - git clone https://github.com/felixgateru/hello-go.git
+      - cd hello-go
       - |
         if [ -z "$REL_VERSION" ]; then
           REL_VERSION="daily-$(date +%Y%m%d)-$(git rev-parse --short HEAD)"
         fi
         echo "Using REL_VERSION=$REL_VERSION"
-
-      - git clone https://github.com/felixgateru/hello-go.git
-      - cd hello-go
       - git checkout $REL_VERSION
       - |
         cat <<EOF > release-metadata.json
