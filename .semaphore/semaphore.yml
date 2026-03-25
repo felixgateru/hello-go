@@ -1,0 +1,36 @@
+version: v1.0
+name: "Hello-go Pipeline"
+
+agent:
+  machine:
+    type: f1-standard-2
+    os_image: ubuntu2204
+
+blocks:
+  - name: "Build & Test"
+    dependencies: []
+    task:
+      jobs:
+        - name: "Build"
+          commands:
+            - checkout
+            - go build ./...
+
+promotions:
+  - name: Release
+    pipeline_file: release.yml
+    parameters:
+      env_vars:
+        - required: true
+          name: REL_VERSION
+          description: "Release version / Git tag to build (e.g. v1.0.0)"
+
+        - required: false
+          name: DEMO_IMAGE_REPO
+          default_value: ghcr.io/felixgateru/hello-go-demo
+          description: "GHCR repository for the demo image"
+
+        - required: false
+          name: STANDARD_IMAGE_REPO
+          default_value: ghcr.io/felixgateru/hello-go
+          description: "GHCR repository for the standard image"
